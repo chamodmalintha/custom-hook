@@ -40,4 +40,4 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         BRANCH: main # Change this if your GitHub Pages branch is different
-        FOLDER: build
+        FOLDER: app/build
