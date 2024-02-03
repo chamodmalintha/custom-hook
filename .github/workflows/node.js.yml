@@ -33,4 +33,8 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           git add build
           git commit -m "Build and deploy to GitHub Pages"
-          git subtree push --prefix build origin gh-pages
+          
+          # Use the personal access token for authentication
+          git remote add deploy "https://${{ secrets.GH_TOKEN }}@github.com/chamodmalintha/react-custom-hook.git"
+          git subtree push --prefix build deploy gh-pages
+
