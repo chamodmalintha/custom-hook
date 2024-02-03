@@ -33,8 +33,7 @@ jobs:
         git config --global user.name "chamodmalintha"
 
     - name: Deploy to GitHub Pages
-      run: |
-        npx gh-pages -d build -u "GitHub Actions <malinthachamod139@gmail.com>@users.noreply.github.com"
+      run: npx gh-pages -d build -u "malinthachamod139@gmail.com"
 
       env:
         CI: true
