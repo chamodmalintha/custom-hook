@@ -35,3 +35,4 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         branch: main
+        folder: build  # Make sure this is the correct path to your build artifacts
