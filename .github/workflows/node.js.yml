@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD for React App
 
 on:
   push:
@@ -10,32 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
 
-      - name: Install Dependencies
-        run: npm install
+    - name: Install Dependencies
+      run: |
+        cd your-react-app-directory
+        npm install
 
-      - name: Run Unit Tests
-        run: npm test
+    - name: Run Unit Tests
+      run: |
+        cd your-react-app-directory
+        npm test
 
-      - name: Build and Deploy to GitHub Pages
-        if: success()
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          npm run build
-          echo "https://chamodmalintha.github.io/React-Custom-Hook/" > build/CNAME
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git add build
-          git commit -m "Build and deploy to GitHub Pages"
-          
-          # Use the personal access token for authentication
-          git remote add deploy "https://${GH_TOKEN}@github.com/chamodmalintha/react-custom-hook.git"
-          git subtree push --prefix build deploy gh-pages
+    - name: Build React App
+      run: |
+        cd your-react-app-directory
+        npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        BRANCH: main # Change this if your GitHub Pages branch is different
