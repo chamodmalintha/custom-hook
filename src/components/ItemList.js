@@ -4,7 +4,7 @@ import Item from './Item'
 import { useClick } from '../hooks/useClick'
 
 export const ItemList = () => {
-    const {items, isLoading, error, clickMe} = useFetch("https://pokeapi.co/api/v2/ability")
+    const {items, isLoading, error} = useFetch("https://pokeapi.co/api/v2/ability")
     const {incremetCounter, decremetCounter} = useClick()
     const [value, setValue] = useState(0);
 
